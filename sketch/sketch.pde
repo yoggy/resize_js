@@ -14,14 +14,15 @@ void setCanvasScale(float val) { canvas_scale = val;}
 ///////////////////////////////////////////////////
 
 int count = 0;
-PFont pfont;
+PFont pfont_l, pfont_s;
 PImage img;
 
 void setup() {
   size(canvas_w, canvas_h);
   frameRate(30);
 
-  pfont = createFont("Meiryo", 64);
+  pfont_l = createFont("Meiryo", 64);
+  pfont_s = createFont("Meiryo", 24);
 }
 
 void draw() {
@@ -31,6 +32,8 @@ void draw() {
 
   // draw content...
   background(0, 0, 255);
+
+  pushMatrix();
 
   translate(canvas_w/2, canvas_h/2);
   rotate(PI * count / 100.0);
@@ -47,7 +50,12 @@ void draw() {
   }
 
   fill(255,255,0);
-  drawText("あいうえお", -150, 20, 3, #ffffff, #000000, pfont);
+  drawText("あいうえお", -150, 20, 3, #ffffff, #000000, pfont_l);
+
+  popMatrix();
+
+  drawText("fps=" + frameRate, canvas_w - 160, canvas_h - 20, 3, #ffffff, #000000, pfont_s);
+
 
   // for html canvas...
   popMatrix();
